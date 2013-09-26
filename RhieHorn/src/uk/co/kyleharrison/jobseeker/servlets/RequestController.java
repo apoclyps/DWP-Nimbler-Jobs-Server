@@ -81,7 +81,7 @@ private static final long serialVersionUID = 1L;
 	private void testMySQL(){
 		MySQLConnector MySQLCon = new MySQLConnector();
 		try {
-			MySQLCon.selectData();
+			//MySQLCon.selectData();
 			/*if(MySQLCon.deleteData("login","loginID")==1){
 				System.out.println("Sucessfully Deleted");
 			}*/

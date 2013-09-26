@@ -54,10 +54,14 @@ public class CountryInfo extends HttpServlet {
         myObj.add("countryInfo", countryObj);
         if(callback != null) {
             out.println(callback + "(" + myObj.toString() + ");");
+            System.out.println(callback + "(" + myObj.toString() + ");");
         }
         else {
             out.println(myObj.toString());
+            System.out.println(myObj.toString());
         }
+        
+        
         
         out.close();
  
