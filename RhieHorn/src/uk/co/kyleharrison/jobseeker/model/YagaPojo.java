@@ -22,50 +22,7 @@ public class YagaPojo implements JobInterface {
 	private String reference;
 	private String rawSalary;
 	private String url;
-	/*
-	private String [] parameters = new String [14];
-	private String [] columns = new String [14];
-	
-	public String [] getColumns(){
-		
-		this.columns[0]="jobBoard";
-		this.columns[1]="salaryPeriod";
-		this.columns[2]="id";
-		this.columns[3]="dateFound";
-		this.columns[4]="salaryMaxYearly";
-		this.columns[5]="title";
-		this.columns[6]="salaryMinYearly";
-		this.columns[7]="location";
-		this.columns[8]="description";
-		this.columns[9]="advertiserType";
-		this.columns[10]="rawSalary";
-		this.columns[11]="url";
-		this.columns[12]="advertiserName";
-		this.columns[13]="type";
-		return columns;
-		
-	}
-	public String [] getParameters(){
-		
-		this.parameters[0]=jobBoard;
-		this.parameters[1]=salaryPeriod;
-		this.parameters[2]=Integer.toString(id);
-		this.parameters[3]=dateFound;
-		this.parameters[4]=salaryMaxYearly;
-		this.parameters[5]=title;
-		this.parameters[6]=salaryMinYearly;
-		this.parameters[7]=location;
-		this.parameters[8]=description;
-		this.parameters[9]=advertiserType;
-		this.parameters[10]=rawSalary;
-		this.parameters[11]=url;
-		this.parameters[12]=advertiserName;
-		this.parameters[13]=type;
-		
-		return parameters;
-	}
-	*/
-	
+
 	public YagaPojo(){
 		
 	}

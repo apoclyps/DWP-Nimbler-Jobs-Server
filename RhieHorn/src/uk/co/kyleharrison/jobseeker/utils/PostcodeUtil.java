@@ -13,22 +13,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import uk.co.kyleharrison.jobseeker.utils.JsonReader;
+import uk.co.kyleharrison.jobseeker.utils.StreamReaderJSONUtil;
 
 public class PostcodeUtil {
 
-	private JsonReader JSR;
+	private StreamReaderJSONUtil JSR;
 	private JSONObject json = null;
 	private JSONArray JSArray = null;
 	private String targetURL = "http://maps.googleapis.com/maps/api/geocode/json?address=dd11jr&sensor=false";
-
-	public PostcodeUtil(){
+	private String postcode="dd1 1jr";
 		
+	public PostcodeUtil(){
+
+	}
+	
+	public PostcodeUtil(String postcode){
+		this.postcode =postcode;
 	}
 	
 	public void Search(){
 		try {
-			json = JSR.readJsonFromUrl(targetURL);
+			json = JSR.readJsonFromUrl(buildURI());
 			JSArray = json.getJSONArray("results");
 			System.out.println(JSArray.get(0).toString());
 		} catch (IOException e) {
@@ -37,9 +42,27 @@ public class PostcodeUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	public void getLocation(){
+		try {
+			json = JSR.readJsonFromUrl("http://maps.googleapis.com/maps/api/geocode/json?address=dd11jr&sensor=false");
+			try{
+				JSArray = json.getJSONArray("address_components");
+				System.out.println(JSArray.get(0).toString());
+			}catch(NullPointerException e){
+				//e.printStackTrace();
+				System.out.println("Exception in address");
+			}
+				
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 
-	public String buildIndeedURI(){
-		this.targetURL = "http://maps.googleapis.com/maps/api/geocode/json?address=dd11jr&sensor=false";
+	public String buildURI(){
+		this.targetURL = "http://maps.googleapis.com/maps/api/geocode/json?address="+postcode+"&sensor=false";
 		return this.targetURL;
 	}
 	
@@ -114,7 +137,7 @@ public class PostcodeUtil {
 			}
 
 			//System.out.println(jsonString);
-			JsonParser jsp = JsonParser.getInstance();
+			PojoMapperUtil jsp = PojoMapperUtil.getInstance();
 			//jsp.parseResults(jsonString);
 			
 		
@@ -154,6 +177,14 @@ public class PostcodeUtil {
 
 	public void setTargetURL(String targetURL) {
 		this.targetURL = targetURL;
+	}
+	
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 	
 }

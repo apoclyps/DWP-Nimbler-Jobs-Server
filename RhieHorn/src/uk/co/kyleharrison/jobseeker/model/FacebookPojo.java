@@ -23,6 +23,38 @@ public class FacebookPojo {
 				ne.printStackTrace();
 			}
 	}
+
+	public String getAppid() {
+		return appid;
+	}
+
+	public String getAppsecret() {
+		return appsecret;
+	}
+
+	public String getAccessTokenStr() {
+		return accessTokenStr;
+	}
+
+	public AccessToken getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAppid(String appid) {
+		this.appid = appid;
+	}
+
+	public void setAppsecret(String appsecret) {
+		this.appsecret = appsecret;
+	}
+
+	public void setAccessTokenStr(String accessTokenStr) {
+		this.accessTokenStr = accessTokenStr;
+	}
+
+	public void setAccessToken(AccessToken accessToken) {
+		this.accessToken = accessToken;
+	}
 	
 	
 }

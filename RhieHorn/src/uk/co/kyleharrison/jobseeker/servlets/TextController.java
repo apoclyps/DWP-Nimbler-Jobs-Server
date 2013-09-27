@@ -13,25 +13,44 @@ import com.clockworksms.ClockworkException;
 import com.clockworksms.ClockworkSmsResult;
 import com.clockworksms.SMS;
 
+/**
+ * Nimbler Server - Text Controller 
+ * Purpose: Sends Texts to Users regarding notifications
+ * @author KYle Harrison
+ * @version 1.0 27/09/2013
+ */
 @WebServlet("/TextController/*")
 public class TextController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private String API_KEY = "2fc8bc99e7fda13de7600bff406255e6830ea10e";
 	
+    /**
+     * Init Text Controller
+     */
     public TextController() {
         super();
     }
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
 	
+	/**
+	 * checkCredit
+	 * Returns the remaining credit from the account as a long
+	 */
 	public void checkCredit(){
 		ClockWorkSmsService clockWorkSmsService;
 		try {
@@ -43,6 +62,10 @@ public class TextController extends HttpServlet {
 		}         
 	}
 	
+	/**
+	 * SendText
+	 * Sends a text to the user
+	 */
 	public void sendText(){
 		try
 	      {

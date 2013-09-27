@@ -10,11 +10,11 @@ import org.json.JSONObject;
 
 import uk.co.kyleharrison.jobseeker.interfaces.ConnectorInterface;
 import uk.co.kyleharrison.jobseeker.model.IndeedPojo;
-import uk.co.kyleharrison.jobseeker.utils.JsonReader;
+import uk.co.kyleharrison.jobseeker.utils.StreamReaderJSONUtil;
 
 public class IndeedConnector implements ConnectorInterface {
 
-	private JsonReader JSR;
+	private StreamReaderJSONUtil JSR;
 	private JSONObject json = null;
 	private IndeedPojo IDP = null;
 	private JSONArray JSArray = null;
@@ -22,7 +22,7 @@ public class IndeedConnector implements ConnectorInterface {
 	private String targetURL ="http://api.indeed.com/ads/apisearch?publisher=8188725749639977&q=java&l=dundee&sort=&format=json&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=uk&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
 
 	public IndeedConnector(){
-		JSR = new JsonReader();
+		JSR = new StreamReaderJSONUtil();
 	}
 
 	public JSONObject Search(){

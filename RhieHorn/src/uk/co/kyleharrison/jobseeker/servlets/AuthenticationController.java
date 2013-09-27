@@ -1,3 +1,10 @@
+/**
+ * Nimbler Server - Authentication 
+ * Purpose: Validates Logins
+ * @author KYle Harrison
+ * @version 1.0 27/09/2013
+ */
+
 package uk.co.kyleharrison.jobseeker.servlets;
 
 import java.io.IOException;
@@ -11,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import uk.co.kyleharrison.jobseeker.connectors.MySQLConnector;
+import uk.co.kyleharrison.jobseeker.model.UserPojo;
 
-import com.as400samplecode.util.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -22,14 +29,23 @@ public class AuthenticationController extends HttpServlet {
  
     private static final long serialVersionUID = 1L;
  
+    /**
+     * 
+     */
     public AuthenticationController() {
         super();
     }
  
+    /* (non-Javadoc)
+     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
  
+    /* (non-Javadoc)
+     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
         System.out.println("Authentication - User Access");
@@ -46,7 +62,7 @@ public class AuthenticationController extends HttpServlet {
         Gson gson = new Gson();
         JsonObject myObj = new JsonObject();
  
-        User userInfo = getInfo(email,password);
+        UserPojo userInfo = getInfo(email,password);
         JsonElement countryObj = gson.toJsonTree(userInfo);
         
         if(authenticateLogin(email,password)){
@@ -64,11 +80,16 @@ public class AuthenticationController extends HttpServlet {
             out.println(myObj.toString());
             System.out.println(myObj.toString());
         }
-        
         out.close();
- 
     }
     
+    /**
+     * authenticateLogin
+     * Searches MySQL Database to check if input criteria is valid
+     * @param email
+     * @param password
+     * @return boolean
+     */
     private boolean authenticateLogin(String email, String password){
     	
     	MySQLConnector mySQLCon = new MySQLConnector();
@@ -82,10 +103,16 @@ public class AuthenticationController extends HttpServlet {
     	return mySQLCon.query(queryString);
     }
     
-    //Get Country Information
-    private User getInfo(String email, String password) {
+    /**
+     * getInfo
+     * Creates a User Object to store in the sessoin using the login details
+     * @param email
+     * @param password
+     * @return UserPojo
+     */
+    private UserPojo getInfo(String email, String password) {
  
-    	User userInfo = new User();
+    	UserPojo userInfo = new UserPojo();
  
     	userInfo.setEmailAddress(email);
     	userInfo.setPassword(password);
@@ -94,6 +121,12 @@ public class AuthenticationController extends HttpServlet {
  
     }  
  
+    /**
+     * getMyStackTrace
+     * debugging the program
+     * @param e
+     * @return
+     */
     public static String getMyStackTrace(Exception e) {
  
         StringWriter stringWriter = new StringWriter();

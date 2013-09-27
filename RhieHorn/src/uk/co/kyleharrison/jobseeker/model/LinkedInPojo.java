@@ -27,6 +27,30 @@ public class LinkedInPojo implements JobInterface {
 	public String getURL() {
 		return null;
 	}
+	public String getApiKey() {
+		return apiKey;
+	}
+	public String getSecretKey() {
+		return secretKey;
+	}
+	public String getAccessToken() {
+		return accessToken;
+	}
+	public String getSecretToken() {
+		return secretToken;
+	}
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
+	}
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+	public void setSecretToken(String secretToken) {
+		this.secretToken = secretToken;
+	}
 	
 	
 	

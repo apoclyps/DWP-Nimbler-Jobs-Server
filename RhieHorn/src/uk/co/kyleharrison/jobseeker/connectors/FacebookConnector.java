@@ -23,8 +23,8 @@ public class FacebookConnector {
 	public FacebookConnector(){
 		
 		AccessToken _accessToken = new DefaultFacebookClient().obtainAppAccessToken(appid,appsecret);
-		//String token=_accessToken.getAccessToken();
-		//System.out.println("My application access token: " + token);
+		String token=_accessToken.getAccessToken();
+		System.out.println("My application access token: " + token);
 
 		facebookClient = new DefaultFacebookClient("CAACEdEose0cBAItIRQKzVYz54gKk47T89H8k4rOenhhrV0pfZAmt90v65gAlU7my5oJn1Ru7qmmwKPHIKLI3mMJObzmZB05qSUIqIR78Uyg6QPhJ1NExhEfmEDmVsqesPcmwEOiZCOayZBngEltmPfkM4BmmYXF297W0f6lr6jDW3IvRFXQFa8vGlPGIPqQZD");
 		publicOnlyFacebookClient = new DefaultFacebookClient();
@@ -72,6 +72,14 @@ public class FacebookConnector {
 
 	}
 	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	public static class FetchObjectsResults {
 		  @Facebook
 		  User me;

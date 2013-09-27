@@ -12,15 +12,14 @@ import org.json.JSONObject;
 
 import uk.co.kyleharrison.jobseeker.interfaces.ConnectorInterface;
 import uk.co.kyleharrison.jobseeker.model.YagaPojo;
-import uk.co.kyleharrison.jobseeker.utils.JsonReader;
+import uk.co.kyleharrison.jobseeker.utils.StreamReaderJSONUtil;
 
-import com.as400samplecode.util.Country;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class YagaJobsConnector implements ConnectorInterface {
 
-	private JsonReader JSR;
+	private StreamReaderJSONUtil JSR;
 	private JSONObject json = null;
 	private YagaPojo YagaJobsP = null;
 	private JSONArray JSArray = null;
@@ -36,7 +35,7 @@ public class YagaJobsConnector implements ConnectorInterface {
 	public int offset =0;
 
 	public YagaJobsConnector(){
-		JSR = new JsonReader();
+		JSR = new StreamReaderJSONUtil();
 		MySQLCon = new MySQLConnector();
 	}
 
@@ -100,15 +99,20 @@ public class YagaJobsConnector implements ConnectorInterface {
 		MySQLCon.insetProcedure(sqlStatement,YagaJobsP);
 	}
 
-	public ArrayList<Object> getJobs(){
+	public ArrayList<Object> getJobs(String [] parameters){
 		
 		//MySQLCon.Select Jobs
-		jobs = MySQLCon.queryDatabase("select * from yagajobs LIMIT 5;");
+		if(location.equals(""))
+		jobs = MySQLCon.queryDatabase("select * from yagajobs WHERE title Like '%"+parameters[0]+"%' LIMIT 100;");
+		else if(!(location.equals(""))){
+			jobs = MySQLCon.queryDatabase("select * from yagajobs WHERE title Like '%"+parameters[0]+"%' AND location='"+parameters[1]+"' LIMIT 100;");
+		}
+			
 		
 		return jobs;
 	}
 	
-	public JSONObject getJson() {
+	public JSONObject getJson(String [] parameters) {
 
 	    // Configure GSON
 		final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -116,7 +120,7 @@ public class YagaJobsConnector implements ConnectorInterface {
 
 	    // Convert to JSON
 	    // A list of objects
-	    final ArrayList<Object> jobs = getJobs();
+	    final ArrayList<Object> jobs = getJobs(parameters);
 	    final String json2 = gson.toJson(jobs);
 	    //System.out.println(json2);
 		
